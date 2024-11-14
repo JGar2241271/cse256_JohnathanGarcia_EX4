@@ -16,4 +16,16 @@ def random_word():
                  "easy",
     ]
     return random.choice(word_pool)
+print(random_word()) # check function to see random.choice from word_pool - Delete later
+def point_system():
+    point_generator = [100,
+                       200,
+                       300,
+                       400,
+                       500
+    ]
+    return random.choice(point_generator)
+print(point_system())
+
+
 
