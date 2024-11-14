@@ -3,6 +3,7 @@
 #EX 4
 
 import random
+
 """select_word function picks random word from word_pool"""
 def random_word():
     #word_pool list creation
@@ -32,10 +33,13 @@ def point_system():
                     ]
     return random.choice(point_generator)
 
+"""function to display letters as they are used"""
+def display_word(word, guessed_letters):
+    display = [letter if letter in guessed_letters else "_" for letter in word]
+    return " ".join(display)
 
 """Function that begins Wheel of Fortune game"""
 def Wheel_Of_Fortune():
-    secret_word = random_word()
     missed_letters_list = set()
     points = 0
     word, hint = random_word()
@@ -52,8 +56,41 @@ def Wheel_Of_Fortune():
 
     print("\n           Lets get started")
     print(f'\nyour word has {len(word)} letters')
+    print(f"Word: {display_word(word.lower(), missed_letters_list)}")
     print(f"\nHint: {hint}")
-    action1 = input("Please select an action: Spin(S) buy a vowel(V)")
+    action1 = input("\nPlease select an action: Spin(S) buy a vowel(V)").lower()
+
+    while True:
+        print(f"\nCurrent word: {display_word(word.lower(), missed_letters_list)}")
+        print(f"\nCurrent points: {points}")
+        if action1 == "s":
+            point = point_system()
+            print(f"for {point} points")
+            action2 = input("please select a consonant").lower()
+
+            if len(action2) != 1:
+                print("Please select a single consonant")
+                continue
+            elif not action2.isalpha():
+                print("Please select a letter")
+                continue
+            elif action2 in missed_letters_list:
+                print("\nLetter has already been guessed")
+            elif action2 in word.lower():
+                missed_letters_list.add(action2)
+                points = points + point
+                print(f"\nCorrect! The letter {action2.upper()} is in mystery word")
+            else:
+                missed_letters_list.add(action2)
+                points = points - point
+                print(f"\nOops, The letter {action2.upper()} is NOT in mystery word. Minus {point} points")
+                break
+
+
+
+
+
+
 
 Wheel_Of_Fortune()
 
