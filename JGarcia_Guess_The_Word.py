@@ -16,6 +16,9 @@ def random_word():
                  "easy": "Opposite of difficult",
                  }
     index = random.randrange(0, 9)
+    to_keys = list(word_pool_and_hint.keys())
+    mystery_word = to_keys[index]
+    return mystery_word, word_pool_and_hint[mystery_word]
 
 
 
@@ -28,25 +31,29 @@ def point_system():
                        500
                     ]
     return random.choice(point_generator)
-print(point_system())
+
 
 """Function that begins Wheel of Fortune game"""
 def Wheel_Of_Fortune():
     secret_word = random_word()
     missed_letters_list = set()
     points = 0
+    word, hint = random_word()
 
-    print("Wheel!")
-    print("of")
+    print("\nWheel!")
+    print("OF!")
     print("Fortune!")
-    print(f"\n Welcome to tonight's game, I am your host Pat Sajak and YOU are playing Wheel of Fortune!")
+    print(f"\nWelcome to tonight's game, I am your host Pat Sajak and YOU are playing Wheel of Fortune!")
     print("\nThe object of the game is to guess the letters in the mystery word.")
     print("A random point will be generated (spin) for each turn taken adding or subtracting from your total")
     print("A turn is when a consonant is guessed (correctly or incorrectly)")
     print("Vowels can be purchased as long as your score is positive , and cost 50 points a piece ")
 
 
-def Wheel_Of_Fortune():
-
     print("\n           Lets get started")
+    print(f'\nyour word has {len(word)} letters')
+    print(f"\nHint: {hint}")
     action1 = input("Please select an action: Spin(S) buy a vowel(V)")
+
+Wheel_Of_Fortune()
+
